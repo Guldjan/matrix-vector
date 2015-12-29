@@ -4,6 +4,7 @@ from .vector import Vector
 class MatrixDimensionError(BaseException):
     pass
 
+max_repr_rows = 12
 
 class Matrix:
     def __init__(self, *rows):
@@ -378,3 +379,10 @@ class Matrix:
         """
         self.elements = [x.round(number) for x in self.elements]
         return self
+
+    def __repr__(self):
+        if self.rows() <= max_repr_rows:
+            return 'Matrix({0})'.format(',\n       '.join(map(str, self.elements)))
+        else:
+            return 'Matrix({0})'.format(',\n       '.join(
+                    map(str, self[:3] + ['...'] + self[-3:])))

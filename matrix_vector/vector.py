@@ -1,6 +1,7 @@
 class DifferentDimensionVectors(BaseException):
     pass
 
+max_repr_elements = 12
 
 class Vector:
     """
@@ -318,3 +319,10 @@ class Vector:
 
     def __eq__(self, vector):
         return self.coordinates == vector.coordinates
+
+    def __repr__(self):
+        if self.size <= max_repr_elements:
+            return 'Vector({0})'.format(', '.join(map(str, self.coordinates)))
+        else:
+            return 'Vector({0})'.format(', '.join(
+                    map(str, self[:3] + ['...'] + self[-3:])))
