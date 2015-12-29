@@ -230,7 +230,7 @@ class Vector:
 
     def __truediv__(self, other):
         """
-        Divides the elements of the vector by a nubmer.
+        Divides the elements of the vector by a number.
         Returns new object.
 
         Example:
@@ -247,7 +247,7 @@ class Vector:
 
     def __itruediv__(self, other):
         """
-        Divides the elements of the vector by a nubmer.
+        Divides the elements of the vector by a number.
         Changes the object.
 
         Example:
