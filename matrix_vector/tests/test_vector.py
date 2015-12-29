@@ -131,3 +131,7 @@ class TestVector(TestCase):
         v = m.Vector(1.345, 2.438, 3.535)
         v.round(2)
         self.assertEqual(v, m.Vector(1.34, 2.44, 3.54))
+
+    def test_repr(self):
+        v = m.Vector(1, 2, 3)
+        self.assertEqual(repr(v), 'Vector(1, 2, 3)')

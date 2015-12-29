@@ -314,3 +314,7 @@ class TestMatrix(TestCase):
         self.assertEqual(a.round(2), m.Matrix([-0.09, 0.13, 0.32],
                                               [-0.09, 0.24, 0.21],
                                               [0.27, -0.17, -0.19]))
+
+    def test_repr(self):
+        a = m.Matrix([1, 2], [3, 4])
+        self.assertEqual(repr(a), 'Matrix(Vector(1, 2),\n       Vector(3, 4))')
