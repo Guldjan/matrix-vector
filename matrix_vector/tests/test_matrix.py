@@ -8,10 +8,10 @@ class TestMatrix(TestCase):
                                   [5, 6, 7],
                                   [8, 9, 10]).rows(), 3)
 
-    def test_colums(self):
+    def test_columns(self):
         self.assertEqual(m.Matrix([1, 2, 3],
                                   [5, 6, 7],
-                                  [8, 9, 10]).colums(), 3)
+                                  [8, 9, 10]).columns(), 3)
 
     def test_get_row(self):
         a = m.Matrix([1, 2, 3],
@@ -26,18 +26,18 @@ class TestMatrix(TestCase):
         with self.assertRaises(IndexError):
             a.get_row(3)
 
-    def test_get_colum(self):
+    def test_get_column(self):
         a = m.Matrix([1, 2, 3],
                      [5, 6, 7],
                      [8, 9, 10])
-        self.assertEqual(a.get_colum(1), m.Vector(2, 6, 9))
+        self.assertEqual(a.get_column(1), m.Vector(2, 6, 9))
 
-    def test_get_colum_out_of_range(self):
+    def test_get_column_out_of_range(self):
         a = m.Matrix([1, 2, 3],
                      [5, 6, 7],
                      [8, 9, 10])
         with self.assertRaises(IndexError):
-            a.get_colum(3)
+            a.get_column(3)
 
     def test_same_dimension_true(self):
         a1 = m.Matrix([1, 2, 3],

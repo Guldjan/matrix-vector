@@ -39,12 +39,12 @@ class Matrix:
         """
         return len(self.elements)
 
-    def colums(self):
+    def columns(self):
         """
-        Returns the number of colums of the matrix.
+        Returns the number of columns of the matrix.
 
         Example:
-        >> Matrix([1, 2, 3], [4, 5, 6], [7, 8, 9]).colums()
+        >> Matrix([1, 2, 3], [4, 5, 6], [7, 8, 9]).columns()
         => 3
 
         Arguments:
@@ -52,18 +52,18 @@ class Matrix:
         """
         return self[0].size
 
-    def get_colum(self, number):
+    def get_column(self, number):
         """
-        Returns the n-th colum of the matrix as an object of class Vector.
+        Returns the n-th column of the matrix as an object of class Vector.
 
         Example:
-        >> Matrix([1, 2, 3], [4, 5, 6], [7, 8, 9]).get_colum(1)
+        >> Matrix([1, 2, 3], [4, 5, 6], [7, 8, 9]).get_column(1)
         => Vector(2, 5, 8)
 
         Arguments:
         number : (int)
         """
-        if (number in range(self.colums())):
+        if (number in range(self.columns())):
             return Vector(*[element[number] for element in self.elements])
         else:
             raise IndexError("Matix index out of range")
@@ -96,7 +96,7 @@ class Matrix:
         matrix : (Matrix)
         """
         rows = (self.rows() == matrix.rows())
-        cols = (self.colums() == matrix.colums())
+        cols = (self.columns() == matrix.columns())
         return rows and cols
 
     def __add_matrix(self, matrix):
@@ -242,7 +242,7 @@ class Matrix:
         Arguments:
         No arguments
         """
-        return Matrix(*[self.get_colum(i) for i in range(self.colums())])
+        return Matrix(*[self.get_column(i) for i in range(self.columns())])
 
     def transpose(self):
         """
@@ -275,7 +275,7 @@ class Matrix:
         matrix : (Matrix)
         """
         if (type(other) is Matrix):
-            if (self.colums() == other.rows()):
+            if (self.columns() == other.rows()):
                 transposed_other = other.transposed()
                 return Matrix(*[[x * y for y in transposed_other]
                               for x in self.elements])
@@ -283,7 +283,7 @@ class Matrix:
                 raise MatrixDimensionError(
                     "Can't multiply matrices with unsutable dimensions")
         elif (type(other) is Vector):
-            if (self.colums() == other.size):
+            if (self.columns() == other.size):
                 return Vector(*[x * other for x in self.elements])
             else:
                 raise MatrixDimensionError(
@@ -293,7 +293,7 @@ class Matrix:
 
     def minor(self, i, j):
         """
-        Returns a matrix without the row and the colum given as arguments.
+        Returns a matrix without the row and the column given as arguments.
 
         Example:
         >> Matrix([1, 2, 3], [4, 5, 6], [7, 8, 9]).minor(0, 1)
@@ -303,7 +303,7 @@ class Matrix:
         number1 : (int)
         number2 : (int)
         """
-        if (i < self.rows() and j < self.colums()):
+        if (i < self.rows() and j < self.columns()):
             minor = [list(el) for el in self.elements]
             del minor[i]
             for k in range(self.rows() - 1):
@@ -327,12 +327,12 @@ class Matrix:
         Arguments:
         no arguments
         """
-        if (self.rows() == self.colums()):
+        if (self.rows() == self.columns()):
             if (self.rows() == 1):
                 return self[0][0]
             else:
                 det = 0
-                for x in range(self.colums()):
+                for x in range(self.columns()):
                     minor_det = self.minor(0, x).determinant()
                     det += self[0][x] * (-1) ** (2 + x) * minor_det
             return det
@@ -354,7 +354,7 @@ class Matrix:
         if (self.determinant() != 0):
             m = Matrix(*[[(-1) ** (i + j) * self.minor(i, j).determinant()
                        for j in range(self.rows())]
-                       for i in range(self.colums())])
+                       for i in range(self.columns())])
             return (m.transposed() * (1 / self.determinant()))
         else:
             raise ZeroDivisionError(
