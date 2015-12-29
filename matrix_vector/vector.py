@@ -252,13 +252,45 @@ class Vector:
         Changes the object.
 
         Example:
-        >> Vector(3, 9, 6) / 3
+        >> Vector(3, 9, 8) / 3
         => Vector(1, 3, 2)
 
         Arguments:
         number : (Numeric)
         """
         self = self / other
+        return self
+
+    def __floordiv__(self, other):
+        """
+        GetsDivides the elements of the vector by a number.
+        Returns new object.
+
+        Example:
+        >> Vector(3, 9, 8) // 3
+        => Vector(1, 3, 2)
+
+        Arguments:
+        number : (Numeric)
+        """
+        try:
+            return Vector(*[_ // other for _ in self.coordinates])
+        except ZeroDivisionError:
+            raise
+
+    def __ifloordiv__(self, other):
+        """
+        Divides the elements of the vector by a number.
+        Changes the object.
+
+        Example:
+        >> Vector(3, 9, 6) // 3
+        => Vector(1, 3, 2)
+
+        Arguments:
+        number : (Numeric)
+        """
+        self = self // other
         return self
 
     @property
