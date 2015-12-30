@@ -112,6 +112,20 @@ class TestVector(TestCase):
         with self.assertRaises(ZeroDivisionError):
             m.Vector(4, 3, 2, 1) / 0
 
+    def test_floor_division(self):
+        v = m.Vector(2, 4, 7)
+        self.assertEqual(v // 2, m.Vector(1, 2, 3))
+        self.assertEqual(v, m.Vector(2, 4, 7))
+
+    def test_i_floor_division(self):
+        v = m.Vector(2, 4, 7)
+        v //= 2
+        self.assertEqual(v, m.Vector(1, 2, 3))
+
+    def test_zero_floor_division(self):
+        with self.assertRaises(ZeroDivisionError):
+            m.Vector(4, 3, 2, 1) // 0
+
     def test_length(self):
         v = m.Vector(1, 2, 3)
         self.assertEqual(round(v.length, 4), 3.7417)
