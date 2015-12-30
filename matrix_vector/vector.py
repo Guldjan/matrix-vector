@@ -264,8 +264,7 @@ class Vector:
     def __floordiv__(self, other):
         """
         Finds the floor when dividing the elements of the vector
-        by a number.
-        Returns new object.
+        by a number. Returns new object.
 
         Example:
         >> Vector(3, 9, 8) // 3
@@ -282,8 +281,7 @@ class Vector:
     def __ifloordiv__(self, other):
         """
         Finds the floor when dividing the elements of the vector
-        by a number.
-        Changes the object.
+        by a number. Changes the object.
 
         Example:
         >> Vector(3, 9, 6) // 3
