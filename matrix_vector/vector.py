@@ -1,6 +1,7 @@
 class DifferentDimensionVectors(BaseException):
     pass
 
+max_repr_elements = 12
 
 class Vector:
     """
@@ -230,7 +231,7 @@ class Vector:
 
     def __truediv__(self, other):
         """
-        Divides the elements of the vector by a nubmer.
+        Divides the elements of the vector by a number.
         Returns new object.
 
         Example:
@@ -247,17 +248,49 @@ class Vector:
 
     def __itruediv__(self, other):
         """
-        Divides the elements of the vector by a nubmer.
+        Divides the elements of the vector by a number.
         Changes the object.
 
         Example:
-        >> Vector(3, 9, 6) / 3
+        >> Vector(3, 9, 8) / 3
         => Vector(1, 3, 2)
 
         Arguments:
         number : (Numeric)
         """
         self = self / other
+        return self
+
+    def __floordiv__(self, other):
+        """
+        Finds the floor when dividing the elements of the vector
+        by a number. Returns new object.
+
+        Example:
+        >> Vector(3, 9, 8) // 3
+        => Vector(1, 3, 2)
+
+        Arguments:
+        number : (Numeric)
+        """
+        try:
+            return Vector(*[_ // other for _ in self.coordinates])
+        except ZeroDivisionError:
+            raise
+
+    def __ifloordiv__(self, other):
+        """
+        Finds the floor when dividing the elements of the vector
+        by a number. Changes the object.
+
+        Example:
+        >> Vector(3, 9, 6) // 3
+        => Vector(1, 3, 2)
+
+        Arguments:
+        number : (Numeric)
+        """
+        self = self // other
         return self
 
     @property
@@ -318,3 +351,10 @@ class Vector:
 
     def __eq__(self, vector):
         return self.coordinates == vector.coordinates
+
+    def __repr__(self):
+        if self.size <= max_repr_elements:
+            return 'Vector({0})'.format(', '.join(map(str, self.coordinates)))
+        else:
+            return 'Vector({0})'.format(', '.join(
+                    map(str, self[:3] + ['...'] + self[-3:])))
